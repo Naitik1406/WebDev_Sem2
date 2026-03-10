@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hill Climb Mini</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(#87CEEB, #e0f7ff);
+}
+
+#game{
+  position:relative;
+  width:100vw;
+  height:100vh;
+}
+
+/* Hills */
+.hill{
+  position:absolute;
+  bottom:0;
+  width:200%;
+  height:200px;
+  background:repeating-linear-gradient(
+    -20deg,
+    #4caf50 0px,
+    #4caf50 120px,
+    #388e3c 120px,
+    #388e3c 240px
+  );
+  animation:moveHill 6s linear infinite;
+}
+
+@keyframes moveHill{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* Car */
+#car{
+  position:absolute;
+  bottom:160px;
+  left:80px;
+  width:80px;
+  height:40px;
+  background:#ff5252;
+  border-radius:10px;
+}
+
+/* Wheels */
+.wheel{
+  position:absolute;
+  bottom:-10px;
+  width:20px;
+  height:20px;
+  background:black;
+  border-radius:50%;
+}
+
+#w1{ left:8px; }
+#w2{ right:8px; }
+
+/* Fuel bar */
+#fuelContainer{
+  position:absolute;
+  top:20px;
+  left:20px;
+  width:200px;
+  height:20px;
+  border:2px solid #000;
+}
+
+#fuel{
+  height:100%;
+  width:100%;
+  background:limegreen;
+}
+
+/* Button */
+#controls{
+  position:absolute;
+  bottom:20px;
+  right:20px;
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  background:#ff9800;
+  border:none;
+  border-radius:10px;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+<div id="game">
+
+  <div class="hill"></div>
+
+  <div id="car">
+    <div id="w1" class="wheel"></div>
+    <div id="w2" class="wheel"></div>
+  </div>
+
+  <div id="fuelContainer">
+    <div id="fuel"></div>
+  </div>
+
+  <div id="controls">
+    <button id="accBtn">ACCELERATE</button>
+    <button id="spdDown">Speed -</button>
+    <button id="spdUp">Speed +</button>
+    <div id="spdDisplay" style="color:white;margin-top:10px;text-align:center;">Limit: 4</div>
+  </div>
+
+</div>
+
+<script>
+let car = document.getElementById("car");
+let fuelBar = document.getElementById("fuel");
+let accelerate = false;
+let maxSpeed = 4;            // speed limit
+let spdDisplay = document.getElementById('spdDisplay');
+
+let y = 160;
+let velocity = 0;
+let fuel = 100;
+
+/* Gravity + Physics */
+function gameLoop(){
+  if(accelerate && fuel > 0){
+    velocity = -maxSpeed;           // use limit
+    fuel -= 0.2;
+  }
+
+  velocity += 0.2;   // gravity
+  y += velocity;
+
+  if(y > 160){
+    y = 160;
+    velocity = 0;
+  }
+
+  car.style.bottom = y + "px";
+  fuelBar.style.width = fuel + "%";
+
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+/* Button controls */
+let btn = document.getElementById("accBtn");
+
+btn.addEventListener("mousedown", () => accelerate = true);
+btn.addEventListener("mouseup", () => accelerate = false);
+btn.addEventListener("touchstart", () => accelerate = true);
+btn.addEventListener("touchend", () => accelerate = false);
+
+/* speed limiter buttons */
+document.getElementById('spdUp').addEventListener('click',()=>{
+  maxSpeed = Math.min(10,maxSpeed+1);
+  spdDisplay.textContent = 'Limit: '+maxSpeed;
+});
+document.getElementById('spdDown').addEventListener('click',()=>{
+  maxSpeed = Math.max(1,maxSpeed-1);
+  spdDisplay.textContent = 'Limit: '+maxSpeed;
+});</script>
+
+</body>
+</html>
