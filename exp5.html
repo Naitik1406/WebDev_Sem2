@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="exp5.css">
+    <script src="exp5.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Salary Management System</h1>
+
+        <div class="labels">
+            <label for="employeeName">Employee Name</label>
+            <input type="text" id="employeeName" placeholder="Enter Employee Name" required><br><br>
+            <label for="employeeId">Employee ID</label>
+            <input type="text" id="employeeId" placeholder="Enter Employee ID" required><br><br>
+            <label for="employeeSalary">Employee Salary</label>
+            <input type="number" id="employeeSalary" placeholder="Enter Employee Salary" required><br><br>
+            <label for="department">Department</label>
+            <input type="text" id="department" placeholder="Enter Department" required><br><br>
+        </div>
+            
+            <button onclick="addEmployee()" class="buttons">Add Employee</button><br><br>
+            <button onclick="filterSalary()" class="buttons">Salary>50,000</button>
+            <button onclick="displayEmployees()" class="buttons">Display Employees</button>
+            <button onclick="calculateTotalSalary()" class="buttons">Calculate Total Salary</button>
+            <button onclick="averageSalary()" class="buttons">Avergae Salary</button>
+            <button onclick="sortByDepartment()" class="buttons">Sort By Department</button>
+
+
+        <div id="employeeList"></div>
+
+    </div>
+
+    <h3 style="text-align: center; font-size: x-large;">Naitik Singhal <br>
+    2025B01011211 <br>
+    CSE-26</h3>
+</body>
+</html>
