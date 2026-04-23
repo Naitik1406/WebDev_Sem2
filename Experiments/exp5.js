@@ -70,12 +70,8 @@ function averageSalary() {
     document.querySelector('#employeeList').innerHTML = `<h2>Average Salary: ${average.toFixed(2)}</h2>`;
 }
 
-function sortByDepartment() {
-    let sorted = [...employees].sort((a, b) => a.department.localeCompare(b.department));
-    let output = "<h2>Employees Sorted by Department</h2>";
-    sorted.forEach(emp => {
-        output += `<p>Name: ${emp.name}, Department: ${emp.department} Salary: ₹${emp.salary} <br> </p>`;
-    });
-
-    document.querySelector('#employeeList').innerHTML = output;
+function countDepartment() {
+    let deptName = prompt("Enter department name:");
+    let count = employees.filter(emp => emp.department.toLowerCase() === deptName.toLowerCase()).length;
+    document.getElementById("employeeList").innerHTML = "<h3>Number of Employees in " + deptName + ": " + count + "</h3>";
 }

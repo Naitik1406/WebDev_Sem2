@@ -6,7 +6,9 @@ function calculateResult() {
         totalMarks += marks;
     }
     let average = totalMarks / subjects;
-    let grade= "";
+    let grade = "";
+    let result = "";
+    
     if (average >= 90 && average <= 100) {
         grade = "A";
     } else if (average >= 80 && average < 90) {
@@ -18,6 +20,9 @@ function calculateResult() {
     } else {
         grade = "F";
     }
-    document.getElementById("result").innerHTML = "Total Marks: " + totalMarks + "<br> Average: " + average.toFixed(2) + "<br> Grade: " + grade;
+    
+    result = average >= 60 ? "PASS" : "FAIL";
+    
+    document.getElementById("result").innerHTML = " <br> <b> Total Marks: " + totalMarks + "<br> Average: " + average.toFixed(2) + "<br> Grade: " + grade + "<br> Result: " + result;
 }
 
