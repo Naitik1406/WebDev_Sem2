@@ -2,7 +2,11 @@
   text-align: center;
   margin-top: 100px;
   font-family: Arial;
-  background-color: rgb(145, 115, 89);
+  background-color: #eeeff2;
+  border-radius: 5px ;
+  padding: 20px;
+  margin: 200px;
+  box-shadow: rgb(123, 123, 123) 0px 0px 10px;
 }
 h1 {
   font-size: 40px;
